@@ -29,11 +29,9 @@ class TodoAdapter(
         notifyItemInserted(todos.size - 1)
     }
 
-    fun deleteTodo(todo:Todo) {
-        val index: Int = todos.indexOf(todo)
-        Log.i("TodoAdapter",  todo.toString() + " removed at index " + index.toString())
-        todos.removeAt(index)
-        notifyItemRemoved(index)
+    fun deleteTodo(position: Int) {
+        todos.removeAt(position)
+        notifyItemRemoved(position)
     }
 
     fun deleteDoneTodos() {
@@ -64,7 +62,7 @@ class TodoAdapter(
             }
 
             ibTodoDelete.setOnClickListener {
-                deleteTodo(currentTodo)
+                deleteTodo(position)
             }
         }
     }
