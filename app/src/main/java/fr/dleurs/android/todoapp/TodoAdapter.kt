@@ -1,6 +1,7 @@
 package fr.dleurs.android.todoapp
 
 import android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +29,13 @@ class TodoAdapter(
         notifyItemInserted(todos.size - 1)
     }
 
+    fun deleteTodo(todo:Todo) {
+        val index: Int = todos.indexOf(todo)
+        Log.i("TodoAdapter",  todo.toString() + " removed at index " + index.toString())
+        todos.removeAt(index)
+        notifyItemRemoved(index)
+    }
+
     fun deleteDoneTodos() {
         todos.removeAll {
             todo -> todo.done
@@ -53,6 +61,10 @@ class TodoAdapter(
             cbTodoDone.setOnCheckedChangeListener{ _, done ->
                 toggleStrikeThrough(tvTodoTitle, done)
                 currentTodo.done = !currentTodo.done
+            }
+
+            ibTodoDelete.setOnClickListener {
+                deleteTodo(currentTodo)
             }
         }
     }
