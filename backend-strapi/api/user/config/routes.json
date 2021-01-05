@@ -1,0 +1,13 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/user/isemailexist/:email",
+      "handler": "user.isEmailExist",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
+  
