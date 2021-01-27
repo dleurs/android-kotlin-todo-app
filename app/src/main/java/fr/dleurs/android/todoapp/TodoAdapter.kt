@@ -42,6 +42,7 @@ class TodoAdapter(
     }
 
     private fun toggleStrikeThrough(tvTodoTitle: TextView, isChecked: Boolean) {
+        println("Clicking on todo")
         if (isChecked) {
             tvTodoTitle.paintFlags = tvTodoTitle.paintFlags or STRIKE_THRU_TEXT_FLAG
         }
