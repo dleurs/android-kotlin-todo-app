@@ -13,10 +13,10 @@ See the License for the specific language governing permissions and
 limitations under the License. -->
 
 <resources>
-    <string name="app_name">RoomWordsSample</string>
+    <string name="app_name">Todo App</string>
     <string name="action_settings">Settings</string>
-    <string name="hint_word">Word…</string>
+    <string name="hint_word">Todo name...</string>
     <string name="button_save">Save</string>
-    <string name="empty_not_saved">Word not saved because it is empty.</string>
-    <string name="add_word">Add word</string>
+    <string name="empty_not_saved">Todo not saved because it is empty.</string>
+    <string name="add_word">Add todo</string>
 </resources>
