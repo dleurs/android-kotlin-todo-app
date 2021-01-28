@@ -37,7 +37,7 @@ class TodoListAdapter : ListAdapter<Todo, WordViewHolder>(WORDS_COMPARATOR) {
     }
 
     class WordViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val wordItemView: TextView = itemView.findViewById(R.id.textView)
+        private val wordItemView: TextView = itemView.findViewById(R.id.todo_list_item_text)
 
         fun bind(text: String?) {
             wordItemView.text = text
