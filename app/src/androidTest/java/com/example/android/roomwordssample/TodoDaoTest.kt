@@ -20,7 +20,6 @@ import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
@@ -37,21 +36,21 @@ import java.io.IOException
  */
 
 @RunWith(AndroidJUnit4::class)
-class WordDaoTest {
+class TodoDaoTest {
 
-    private lateinit var wordDao: WordDao
-    private lateinit var db: WordRoomDatabase
+    private lateinit var todoDao: TodoDao
+    private lateinit var db: TodoRoomDatabase
 
     @Before
     fun createDb() {
         val context: Context = ApplicationProvider.getApplicationContext()
         // Using an in-memory database because the information stored here disappears when the
         // process is killed.
-        db = Room.inMemoryDatabaseBuilder(context, WordRoomDatabase::class.java)
+        db = Room.inMemoryDatabaseBuilder(context, TodoRoomDatabase::class.java)
             // Allowing main thread queries, just for testing.
             .allowMainThreadQueries()
             .build()
-        wordDao = db.wordDao()
+        todoDao = db.todoDao()
     }
 
     @After
@@ -63,33 +62,33 @@ class WordDaoTest {
     @Test
     @Throws(Exception::class)
     fun insertAndGetWord() = runBlocking {
-        val word = Word("word")
-        wordDao.insert(word)
-        val allWords = wordDao.getAlphabetizedWords().first()
-        assertEquals(allWords[0].word, word.word)
+        val todo = Todo("word")
+        todoDao.insert(todo)
+        val allTodos = todoDao.getTodos().first()
+        assertEquals(allTodos[0].name, todo.name)
     }
 
     @Test
     @Throws(Exception::class)
     fun getAllWords() = runBlocking {
-        val word = Word("aaa")
-        wordDao.insert(word)
-        val word2 = Word("bbb")
-        wordDao.insert(word2)
-        val allWords = wordDao.getAlphabetizedWords().first()
-        assertEquals(allWords[0].word, word.word)
-        assertEquals(allWords[1].word, word2.word)
+        val todo = Todo("aaa")
+        todoDao.insert(todo)
+        val todo2 = Todo("bbb")
+        todoDao.insert(todo2)
+        val allTodos: List<Todo> = todoDao.getTodos().first()
+        assertEquals(allTodos[0].name, todo.name)
+        assertEquals(allTodos[1].name, todo2.name)
     }
 
     @Test
     @Throws(Exception::class)
     fun deleteAll() = runBlocking {
-        val word = Word("word")
-        wordDao.insert(word)
-        val word2 = Word("word2")
-        wordDao.insert(word2)
-        wordDao.deleteAll()
-        val allWords = wordDao.getAlphabetizedWords().first()
+        val todo = Todo("word")
+        todoDao.insert(todo)
+        val todo2 = Todo("word2")
+        todoDao.insert(todo2)
+        todoDao.deleteAll()
+        val allWords = todoDao.getTodos().first()
         assertTrue(allWords.isEmpty())
     }
 }

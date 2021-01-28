@@ -32,16 +32,16 @@ import kotlinx.coroutines.flow.Flow
  */
 
 @Dao
-interface WordDao {
+interface TodoDao {
 
     // The flow always holds/caches latest version of data. Notifies its observers when the
     // data has changed.
-    @Query("SELECT * FROM word_table ORDER BY word ASC")
-    fun getAlphabetizedWords(): Flow<List<Word>>
+    @Query("SELECT * FROM todo_table ORDER BY name ASC")
+    fun getTodos(): Flow<List<Todo>>
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(word: Word)
+    @Insert
+    suspend fun insert(word: Todo)
 
-    @Query("DELETE FROM word_table")
+    @Query("DELETE FROM todo_table")
     suspend fun deleteAll()
 }

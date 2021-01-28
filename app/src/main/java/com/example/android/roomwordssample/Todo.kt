@@ -31,5 +31,12 @@ import androidx.room.PrimaryKey
  * https://developer.android.com/topic/libraries/architecture/room.html
  */
 
-@Entity(tableName = "word_table")
-data class Word(@PrimaryKey @ColumnInfo(name = "word") val word: String)
+@Entity(tableName = "todo_table")
+data class Todo(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int,
+    val name: String,
+    val done: Boolean = false
+    ) {
+    constructor(name: String) : this(0, name);
+}

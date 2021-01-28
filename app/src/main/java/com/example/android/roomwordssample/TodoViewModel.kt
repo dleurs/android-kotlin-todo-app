@@ -28,27 +28,27 @@ import kotlinx.coroutines.launch
  * an up-to-date list of all words.
  */
 
-class WordViewModel(private val repository: WordRepository) : ViewModel() {
+class TodoViewModel(private val repository: TodoRepository) : ViewModel() {
 
     // Using LiveData and caching what allWords returns has several benefits:
     // - We can put an observer on the data (instead of polling for changes) and only update the
     //   the UI when the data actually changes.
     // - Repository is completely separated from the UI through the ViewModel.
-    val allWords: LiveData<List<Word>> = repository.allWords.asLiveData()
+    val allTodos: LiveData<List<Todo>> = repository.allTodos.asLiveData()
 
     /**
      * Launching a new coroutine to insert the data in a non-blocking way
      */
-    fun insert(word: Word) = viewModelScope.launch {
-        repository.insert(word)
+    fun insert(todo: Todo) = viewModelScope.launch {
+        repository.insert(todo)
     }
 }
 
-class WordViewModelFactory(private val repository: WordRepository) : ViewModelProvider.Factory {
+class WordViewModelFactory(private val repository: TodoRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(WordViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(TodoViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return WordViewModel(repository) as T
+            return TodoViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

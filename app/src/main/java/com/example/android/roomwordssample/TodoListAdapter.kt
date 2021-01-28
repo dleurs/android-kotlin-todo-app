@@ -23,9 +23,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.android.roomwordssample.WordListAdapter.WordViewHolder
+import com.example.android.roomwordssample.TodoListAdapter.WordViewHolder
 
-class WordListAdapter : ListAdapter<Word, WordViewHolder>(WORDS_COMPARATOR) {
+class TodoListAdapter : ListAdapter<Todo, WordViewHolder>(WORDS_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordViewHolder {
         return WordViewHolder.create(parent)
@@ -33,7 +33,7 @@ class WordListAdapter : ListAdapter<Word, WordViewHolder>(WORDS_COMPARATOR) {
 
     override fun onBindViewHolder(holder: WordViewHolder, position: Int) {
         val current = getItem(position)
-        holder.bind(current.word)
+        holder.bind(current.name)
     }
 
     class WordViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -53,13 +53,13 @@ class WordListAdapter : ListAdapter<Word, WordViewHolder>(WORDS_COMPARATOR) {
     }
 
     companion object {
-        private val WORDS_COMPARATOR = object : DiffUtil.ItemCallback<Word>() {
-            override fun areItemsTheSame(oldItem: Word, newItem: Word): Boolean {
+        private val WORDS_COMPARATOR = object : DiffUtil.ItemCallback<Todo>() {
+            override fun areItemsTheSame(oldItem: Todo, newItem: Todo): Boolean {
                 return oldItem === newItem
             }
 
-            override fun areContentsTheSame(oldItem: Word, newItem: Word): Boolean {
-                return oldItem.word == newItem.word
+            override fun areContentsTheSame(oldItem: Todo, newItem: Todo): Boolean {
+                return oldItem.name == newItem.name
             }
         }
     }
