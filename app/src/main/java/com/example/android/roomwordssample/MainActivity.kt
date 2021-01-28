@@ -32,9 +32,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
 
-    private val newWordActivityRequestCode = 1
+    private val createTodoActivityRequestCode = 1
     private val todoViewModel: TodoViewModel by viewModels {
-        WordViewModelFactory((application as TodosApplication).repository)
+        TodoViewModelFactory((application as TodosApplication).repository)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,15 +46,15 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        todoViewModel.allTodos.observe(owner = this) { words ->
+        todoViewModel.allTodos.observe(owner = this) { todos ->
             // Update the cached copy of the words in the adapter.
-            words.let { adapter.submitList(it) }
+            todos.let { adapter.submitList(it) }
         }
 
         val fab = findViewById<FloatingActionButton>(R.id.fab)
         fab.setOnClickListener {
             val intent = Intent(this@MainActivity, NewWordActivity::class.java)
-            startActivityForResult(intent, newWordActivityRequestCode)
+            startActivityForResult(intent, createTodoActivityRequestCode)
         }
 
         val editTextTodo = findViewById<EditText>(R.id.etTodoTitle)
@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
         super.onActivityResult(requestCode, resultCode, intentData)
 
-        if (requestCode == newWordActivityRequestCode && resultCode == Activity.RESULT_OK) {
+        if (requestCode == createTodoActivityRequestCode && resultCode == Activity.RESULT_OK) {
             intentData?.getStringExtra(EXTRA_REPLY)?.let { reply ->
                 val todo = Todo(reply)
                 todoViewModel.insert(todo)

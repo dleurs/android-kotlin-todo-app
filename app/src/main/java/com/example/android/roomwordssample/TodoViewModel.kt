@@ -42,9 +42,13 @@ class TodoViewModel(private val repository: TodoRepository) : ViewModel() {
     fun insert(todo: Todo) = viewModelScope.launch {
         repository.insert(todo)
     }
+
+    fun delete(todo: Todo) = viewModelScope.launch {
+        repository.delete(todo)
+    }
 }
 
-class WordViewModelFactory(private val repository: TodoRepository) : ViewModelProvider.Factory {
+class TodoViewModelFactory(private val repository: TodoRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(TodoViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")

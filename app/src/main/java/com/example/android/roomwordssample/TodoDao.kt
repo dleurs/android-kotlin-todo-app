@@ -16,10 +16,7 @@
 
 package com.example.android.roomwordssample
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -40,7 +37,10 @@ interface TodoDao {
     fun getTodos(): Flow<List<Todo>>
 
     @Insert
-    suspend fun insert(word: Todo)
+    suspend fun insert(todo: Todo)
+
+    @Delete
+    suspend fun delete(todo: Todo)
 
     @Query("DELETE FROM todo_table")
     suspend fun deleteAll()

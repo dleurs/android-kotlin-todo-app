@@ -18,25 +18,43 @@ package com.example.android.roomwordssample
 
 import android.view.LayoutInflater
 import android.view.View
+import android.app.Activity
+import android.content.Intent
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.android.roomwordssample.TodoListAdapter.WordViewHolder
+import androidx.activity.viewModels
 
-class TodoListAdapter : ListAdapter<Todo, WordViewHolder>(WORDS_COMPARATOR) {
+class TodoListAdapter : ListAdapter<Todo, TodoListAdapter.TodoViewHolder>(TODOS_COMPARATOR) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordViewHolder {
-        return WordViewHolder.create(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
+        return TodoViewHolder.create(parent)
     }
 
-    override fun onBindViewHolder(holder: WordViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         val current = getItem(position)
         holder.bind(current.name)
+        holder.itemView.apply {
+            val buttonDelete = findViewById<ImageButton>(R.id.imageButton)
+            buttonDelete.setOnClickListener {
+                //todoViewModel.delete(current)
+            }
+        }
+
     }
 
-    class WordViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    fun deleteTodo(position: Int) {
+        //todos.removeAt(position)
+        //notifyItemRemoved(position)
+    }
+
+    class TodoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val wordItemView: TextView = itemView.findViewById(R.id.todo_list_item_text)
 
         fun bind(text: String?) {
@@ -44,16 +62,16 @@ class TodoListAdapter : ListAdapter<Todo, WordViewHolder>(WORDS_COMPARATOR) {
         }
 
         companion object {
-            fun create(parent: ViewGroup): WordViewHolder {
+            fun create(parent: ViewGroup): TodoViewHolder {
                 val view: View = LayoutInflater.from(parent.context)
                     .inflate(R.layout.recyclerview_item, parent, false)
-                return WordViewHolder(view)
+                return TodoViewHolder(view)
             }
         }
     }
 
     companion object {
-        private val WORDS_COMPARATOR = object : DiffUtil.ItemCallback<Todo>() {
+        private val TODOS_COMPARATOR = object : DiffUtil.ItemCallback<Todo>() {
             override fun areItemsTheSame(oldItem: Todo, newItem: Todo): Boolean {
                 return oldItem === newItem
             }
