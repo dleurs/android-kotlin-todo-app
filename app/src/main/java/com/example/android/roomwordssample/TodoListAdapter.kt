@@ -46,7 +46,6 @@ class TodoListAdapter : ListAdapter<Todo, TodoListAdapter.TodoViewHolder>(TODOS_
                 //todoViewModel.delete(current)
             }
         }
-
     }
 
     fun deleteTodo(position: Int) {
