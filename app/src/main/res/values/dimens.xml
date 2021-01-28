@@ -13,10 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License. -->
 
 <resources>
-    <string name="app_name">RoomWordsSample</string>
-    <string name="action_settings">Settings</string>
-    <string name="hint_word">Word…</string>
-    <string name="button_save">Save</string>
-    <string name="empty_not_saved">Word not saved because it is empty.</string>
-    <string name="add_word">Add word</string>
+    <dimen name="small_padding">8dp</dimen>
+    <dimen name="big_padding">16dp</dimen>
+    <dimen name="min_height">48dp</dimen>
 </resources>

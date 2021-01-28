@@ -1,2 +1,0 @@
-fr/dleurs/android/todoapp/BuildConfig.java
- fr.dleurs.android.todoapp.BuildConfig
