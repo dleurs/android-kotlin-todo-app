@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity(), TodoInterface {
         const val EXTRA_REPLY = "com.example.android.wordlistsql.REPLY"
     }
 
-    override fun onItemClick(position: Int): Void {
-        TODO("Not yet implemented")
+    override fun onItemClick(todo: Todo) {
+        todoViewModel.delete(todo)
     }
 }
