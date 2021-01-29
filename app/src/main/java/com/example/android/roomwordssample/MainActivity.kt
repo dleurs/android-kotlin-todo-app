@@ -30,7 +30,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), TodoInterface {
 
     private val createTodoActivityRequestCode = 1
     private val todoViewModel: TodoViewModel by viewModels {
@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-        val adapter = TodoListAdapter()
+        val adapter = TodoListAdapter(this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -93,5 +93,9 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_REPLY = "com.example.android.wordlistsql.REPLY"
+    }
+
+    override fun onItemClick(position: Int): Void {
+        TODO("Not yet implemented")
     }
 }

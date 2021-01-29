@@ -31,8 +31,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.activity.viewModels
 
-class TodoListAdapter : ListAdapter<Todo, TodoListAdapter.TodoViewHolder>(TODOS_COMPARATOR) {
-
+class TodoListAdapter(todoInterface: TodoInterface) : ListAdapter<Todo, TodoListAdapter.TodoViewHolder>(TODOS_COMPARATOR) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         return TodoViewHolder.create(parent)
     }
@@ -40,24 +39,25 @@ class TodoListAdapter : ListAdapter<Todo, TodoListAdapter.TodoViewHolder>(TODOS_
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         val current = getItem(position)
         holder.bind(current.name)
-        holder.itemView.apply {
-            val buttonDelete = findViewById<ImageButton>(R.id.imageButton)
-            buttonDelete.setOnClickListener {
-                //todoViewModel.delete(current)
-            }
-        }
-    }
+/*        holder.itemView.apply {
+            val deleteTodo: ImageButton = findViewById(R.id.imageButton)
+            deleteTodo.setOnClickListener {
 
-    fun deleteTodo(position: Int) {
-        //todos.removeAt(position)
-        //notifyItemRemoved(position)
+            }
+        }*/
     }
 
     class TodoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val wordItemView: TextView = itemView.findViewById(R.id.todo_list_item_text)
+        private val deleteTodo: ImageButton = itemView.findViewById(R.id.imageButton)
 
         fun bind(text: String?) {
             wordItemView.text = text
+            deleteTodo.setOnClickListener {
+                //deleteTodoIntent: Intent = In
+                //setFragmentResult("requestKey", bundleOf("bundleKey" to result))
+            }
+
         }
 
         companion object {
