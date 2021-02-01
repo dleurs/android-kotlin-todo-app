@@ -31,7 +31,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.activity.viewModels
 
-class TodoListAdapter(todoInterface: TodoInterface) : ListAdapter<Todo, TodoListAdapter.TodoViewHolder>(TODOS_COMPARATOR) {
+class TodoListAdapter(private val todoInterface: TodoInterface) : ListAdapter<Todo, TodoListAdapter.TodoViewHolder>(TODOS_COMPARATOR) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         return TodoViewHolder.create(parent)
     }
@@ -39,12 +39,6 @@ class TodoListAdapter(todoInterface: TodoInterface) : ListAdapter<Todo, TodoList
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         val current = getItem(position)
         holder.bind(current.name)
-/*        holder.itemView.apply {
-            val deleteTodo: ImageButton = findViewById(R.id.imageButton)
-            deleteTodo.setOnClickListener {
-
-            }
-        }*/
     }
 
     class TodoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -53,11 +47,6 @@ class TodoListAdapter(todoInterface: TodoInterface) : ListAdapter<Todo, TodoList
 
         fun bind(text: String?) {
             wordItemView.text = text
-            deleteTodo.setOnClickListener {
-                //deleteTodoIntent: Intent = In
-                //setFragmentResult("requestKey", bundleOf("bundleKey" to result))
-            }
-
         }
 
         companion object {
