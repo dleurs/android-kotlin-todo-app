@@ -33,38 +33,41 @@ import androidx.activity.viewModels
 
 class TodoListAdapter(todoInterface: TodoInterface) : ListAdapter<Todo, TodoListAdapter.TodoViewHolder>(TODOS_COMPARATOR) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
-        return TodoViewHolder.create(parent)
+           return TodoViewHolder.create(parent,todoInterface)
     }
 
-    override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
-        val current = getItem(position)
-        holder.bind(current.name)
-/*        holder.itemView.apply {
-            val deleteTodo: ImageButton = findViewById(R.id.imageButton)
-            deleteTodo.setOnClickListener {
+  override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
+    val current = getItem(position)
+    holder.bind(current)
 
-            }
-        }*/
-    }
+  }
 
-    class TodoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class TodoViewHolder(itemView: View, private val todoInterface: TodoInterface) : RecyclerView.ViewHolder(itemView) {
         private val wordItemView: TextView = itemView.findViewById(R.id.todo_list_item_text)
         private val deleteTodo: ImageButton = itemView.findViewById(R.id.imageButton)
 
-        fun bind(text: String?) {
-            wordItemView.text = text
-            deleteTodo.setOnClickListener {
-                //deleteTodoIntent: Intent = In
-                //setFragmentResult("requestKey", bundleOf("bundleKey" to result))
-            }
+        var data:Todo? = null
 
+      init {
+       deleteTodo.setOnClickListener {
+         data?.let {
+           todoInterface.onItemClick(it)
+         }
         }
+    }
+        
+          fun bind(item: Todo?) {
+      // assign it to `data` so it can be used with `setOnClickListener`
+      data = item
+      wordItemView.text = item?.name
+
+    }
 
         companion object {
-            fun create(parent: ViewGroup): TodoViewHolder {
+            fun create(parent: ViewGroup,todoInterface: TodoInterface): TodoViewHolder {
                 val view: View = LayoutInflater.from(parent.context)
                     .inflate(R.layout.recyclerview_item, parent, false)
-                return TodoViewHolder(view)
+                return TodoViewHolder(view,todoInterface)
             }
         }
     }
