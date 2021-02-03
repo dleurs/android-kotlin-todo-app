@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.roomwordssample
+package com.example.android.roomwordssample.database
 
 import android.content.Context
 import androidx.room.Database
@@ -30,24 +30,24 @@ import kotlinx.coroutines.launch
  * The fact that this has very few comments emphasizes its coolness.
  */
 @Database(entities = [Todo::class], version = 1)
-abstract class TodoRoomDatabase : RoomDatabase() {
+abstract class TodoDatabase : RoomDatabase() {
 
     abstract fun todoDao(): TodoDao
 
     companion object {
         @Volatile
-        private var INSTANCE: TodoRoomDatabase? = null
+        private var INSTANCE: TodoDatabase? = null
 
         fun getDatabase(
             context: Context,
             scope: CoroutineScope
-        ): TodoRoomDatabase {
+        ): TodoDatabase {
             // if the INSTANCE is not null, then return it,
             // if it is, then create the database
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    TodoRoomDatabase::class.java,
+                    TodoDatabase::class.java,
                     "todo_database"
                 )
                     // Wipes and rebuilds instead of migrating if no Migration object.

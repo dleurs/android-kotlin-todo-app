@@ -14,26 +14,24 @@
  * limitations under the License.
  */
 
-package com.example.android.roomwordssample
+package com.example.android.roomwordssample.todo
 
 import android.view.LayoutInflater
 import android.view.View
-import android.app.Activity
-import android.content.Intent
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.activity.viewModels
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import androidx.activity.viewModels
+import com.example.android.roomwordssample.R
+import com.example.android.roomwordssample.database.Todo
 
-class TodoListAdapter(private val todoInterface: TodoInterface) : ListAdapter<Todo, TodoListAdapter.TodoViewHolder>(TODOS_COMPARATOR) {
+class TodoListAdapter(private val todoInterface: TodoInterface) : ListAdapter<Todo, TodoListAdapter.TodoViewHolder>(
+    TODOS_COMPARATOR
+) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
-           return TodoViewHolder.create(parent,todoInterface)
+           return TodoViewHolder.create(parent, todoInterface)
     }
 
   override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
@@ -46,7 +44,7 @@ class TodoListAdapter(private val todoInterface: TodoInterface) : ListAdapter<To
         private val wordItemView: TextView = itemView.findViewById(R.id.todo_list_item_text)
         private val deleteTodo: ImageButton = itemView.findViewById(R.id.imageButton)
 
-        var data:Todo? = null
+        var data: Todo? = null
 
       init {
        deleteTodo.setOnClickListener {

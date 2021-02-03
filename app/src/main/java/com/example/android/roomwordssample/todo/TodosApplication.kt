@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
-package com.example.android.roomwordssample
+package com.example.android.roomwordssample.todo
 
 import android.app.Application
+import com.example.android.roomwordssample.database.TodoRepository
+import com.example.android.roomwordssample.database.TodoDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 
@@ -26,6 +28,6 @@ class TodosApplication : Application() {
 
     // Using by lazy so the database and the repository are only created when they're needed
     // rather than when the application starts
-    val database by lazy { TodoRoomDatabase.getDatabase(this, applicationScope) }
+    val database by lazy { TodoDatabase.getDatabase(this, applicationScope) }
     val repository by lazy { TodoRepository(database.todoDao()) }
 }

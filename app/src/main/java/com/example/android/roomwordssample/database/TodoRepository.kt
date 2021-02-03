@@ -13,9 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.android.roomwordssample
+package com.example.android.roomwordssample.database
 
 import androidx.annotation.WorkerThread
+import com.example.android.roomwordssample.database.Todo
+import com.example.android.roomwordssample.database.TodoDao
 import kotlinx.coroutines.flow.Flow
 
 /**

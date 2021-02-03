@@ -28,6 +28,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.android.roomwordssample.database.Todo
+import com.example.android.roomwordssample.todo.TodoInterface
+import com.example.android.roomwordssample.todo.TodoListAdapter
+import com.example.android.roomwordssample.todo.TodosApplication
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity(), TodoInterface {

@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package com.example.android.roomwordssample
+package com.example.android.roomwordssample.database
 
 import androidx.room.*
+import com.example.android.roomwordssample.database.Todo
 import kotlinx.coroutines.flow.Flow
 
 /**

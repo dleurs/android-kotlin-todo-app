@@ -20,6 +20,9 @@ import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.example.android.roomwordssample.database.Todo
+import com.example.android.roomwordssample.database.TodoDao
+import com.example.android.roomwordssample.database.TodoDatabase
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.After
@@ -40,14 +43,14 @@ import java.io.IOException
 class TodoDaoTest {
 
     private lateinit var todoDao: TodoDao
-    private lateinit var db: TodoRoomDatabase
+    private lateinit var db: TodoDatabase
 
     @Before
     fun createDb() {
         val context: Context = ApplicationProvider.getApplicationContext()
         // Using an in-memory database because the information stored here disappears when the
         // process is killed.
-        db = Room.inMemoryDatabaseBuilder(context, TodoRoomDatabase::class.java)
+        db = Room.inMemoryDatabaseBuilder(context, TodoDatabase::class.java)
             // Allowing main thread queries, just for testing.
             .allowMainThreadQueries()
             .build()

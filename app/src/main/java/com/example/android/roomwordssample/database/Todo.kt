@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.roomwordssample
+package com.example.android.roomwordssample.database
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
