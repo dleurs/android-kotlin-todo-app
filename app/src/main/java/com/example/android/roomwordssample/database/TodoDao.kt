@@ -17,7 +17,6 @@
 package com.example.android.roomwordssample.database
 
 import androidx.room.*
-import com.example.android.roomwordssample.database.Todo
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -35,13 +34,13 @@ interface TodoDao {
     // The flow always holds/caches latest version of data. Notifies its observers when the
     // data has changed.
     @Query("SELECT * FROM todo_table ORDER BY name ASC")
-    fun getTodos(): Flow<List<Todo>>
+    fun getTodos(): Flow<List<TodoRoom>>
 
     @Insert
-    suspend fun insert(todo: Todo)
+    suspend fun insert(todoRoom: TodoRoom)
 
     @Delete
-    suspend fun delete(todo: Todo)
+    suspend fun delete(todoRoom: TodoRoom)
 
     @Query("DELETE FROM todo_table")
     suspend fun deleteAll()

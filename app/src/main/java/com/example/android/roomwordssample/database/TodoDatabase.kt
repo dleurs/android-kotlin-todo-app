@@ -29,7 +29,7 @@ import kotlinx.coroutines.launch
  * This is the backend. The database. This used to be done by the OpenHelper.
  * The fact that this has very few comments emphasizes its coolness.
  */
-@Database(entities = [Todo::class], version = 1)
+@Database(entities = [TodoRoom::class], version = 1)
 abstract class TodoDatabase : RoomDatabase() {
 
     abstract fun todoDao(): TodoDao
@@ -88,9 +88,9 @@ abstract class TodoDatabase : RoomDatabase() {
             // Not needed if you only populate on creation.
             todoDao.deleteAll()
 
-            var word = Todo("Do sport")
+            var word = TodoRoom("Do sport")
             todoDao.insert(word)
-            word = Todo("Meditation")
+            word = TodoRoom("Meditation")
             todoDao.insert(word)
         }
     }

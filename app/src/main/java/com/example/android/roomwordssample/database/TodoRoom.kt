@@ -32,7 +32,7 @@ import androidx.room.PrimaryKey
  */
 
 @Entity(tableName = "todo_table")
-data class Todo(
+data class TodoRoom(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val name: String,

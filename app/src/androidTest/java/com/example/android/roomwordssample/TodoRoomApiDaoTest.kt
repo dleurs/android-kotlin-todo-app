@@ -20,7 +20,7 @@ import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.example.android.roomwordssample.database.Todo
+import com.example.android.roomwordssample.database.TodoRoom
 import com.example.android.roomwordssample.database.TodoDao
 import com.example.android.roomwordssample.database.TodoDatabase
 import kotlinx.coroutines.flow.first
@@ -40,7 +40,7 @@ import java.io.IOException
  */
 
 @RunWith(AndroidJUnit4::class)
-class TodoDaoTest {
+class TodoRoomApiDaoTest {
 
     private lateinit var todoDao: TodoDao
     private lateinit var db: TodoDatabase
@@ -66,7 +66,7 @@ class TodoDaoTest {
     @Test
     @Throws(Exception::class)
     fun insertAndGetWord() = runBlocking {
-        val todo = Todo("word")
+        val todo = TodoRoom("word")
         todoDao.insert(todo)
         val allTodos = todoDao.getTodos().first()
         assertEquals(allTodos[0].name, todo.name)
@@ -75,21 +75,21 @@ class TodoDaoTest {
     @Test
     @Throws(Exception::class)
     fun getAllWords() = runBlocking {
-        val todo = Todo("aaa")
+        val todo = TodoRoom("aaa")
         todoDao.insert(todo)
-        val todo2 = Todo("bbb")
+        val todo2 = TodoRoom("bbb")
         todoDao.insert(todo2)
-        val allTodos: List<Todo> = todoDao.getTodos().first()
-        assertEquals(allTodos[0].name, todo.name)
-        assertEquals(allTodos[1].name, todo2.name)
+        val allTodoRooms: List<TodoRoom> = todoDao.getTodos().first()
+        assertEquals(allTodoRooms[0].name, todo.name)
+        assertEquals(allTodoRooms[1].name, todo2.name)
     }
 
     @Test
     @Throws(Exception::class)
     fun deleteAll() = runBlocking {
-        val todo = Todo("word")
+        val todo = TodoRoom("word")
         todoDao.insert(todo)
-        val todo2 = Todo("word2")
+        val todo2 = TodoRoom("word2")
         todoDao.insert(todo2)
         todoDao.deleteAll()
         val allWords = todoDao.getTodos().first()

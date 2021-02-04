@@ -16,8 +16,6 @@
 package com.example.android.roomwordssample.database
 
 import androidx.annotation.WorkerThread
-import com.example.android.roomwordssample.database.Todo
-import com.example.android.roomwordssample.database.TodoDao
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -28,18 +26,18 @@ class TodoRepository(private val todoDao: TodoDao) {
 
     // Room executes all queries on a separate thread.
     // Observed Flow will notify the observer when the data has changed.
-    val allTodos: Flow<List<Todo>> = todoDao.getTodos()
+    val allTodosRoom: Flow<List<TodoRoom>> = todoDao.getTodos()
 
     // By default Room runs suspend queries off the main thread, therefore, we don't need to
     // implement anything else to ensure we're not doing long running database work
     // off the main thread.
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun insert(todo: Todo) {
-        todoDao.insert(todo)
+    suspend fun insertRoom(todoRoom: TodoRoom) {
+        todoDao.insert(todoRoom)
     }
 
-    suspend fun delete(todo: Todo) {
-        todoDao.delete(todo)
+    suspend fun deleteRoom(todoRoom: TodoRoom) {
+        todoDao.delete(todoRoom)
     }
 }

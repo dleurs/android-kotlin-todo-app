@@ -26,10 +26,10 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface TodoApiService {
-    @GET("todo")
-    suspend fun getTodos(): List<Todo>
+    @GET("todos")
+    suspend fun getTodos(): List<TodoApi>
 }
 
-object TodoApi {
+object TodoRetrofitApi {
     val retrofitService : TodoApiService by lazy { retrofit.create(TodoApiService::class.java) }
 }

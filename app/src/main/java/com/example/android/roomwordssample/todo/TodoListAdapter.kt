@@ -25,9 +25,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.roomwordssample.R
-import com.example.android.roomwordssample.database.Todo
+import com.example.android.roomwordssample.database.TodoRoom
+import com.example.android.roomwordssample.mocki.TodoApi
 
-class TodoListAdapter(private val todoInterface: TodoInterface) : ListAdapter<Todo, TodoListAdapter.TodoViewHolder>(
+class TodoListAdapter(private val todoInterface: TodoInterface) : ListAdapter<TodoApi, TodoListAdapter.TodoViewHolder>(
     TODOS_COMPARATOR
 ) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
@@ -44,7 +45,7 @@ class TodoListAdapter(private val todoInterface: TodoInterface) : ListAdapter<To
         private val wordItemView: TextView = itemView.findViewById(R.id.todo_list_item_text)
         private val deleteTodo: ImageButton = itemView.findViewById(R.id.imageButton)
 
-        var data: Todo? = null
+        var data: TodoApi? = null
 
       init {
        deleteTodo.setOnClickListener {
@@ -54,10 +55,10 @@ class TodoListAdapter(private val todoInterface: TodoInterface) : ListAdapter<To
         }
     }
         
-          fun bind(item: Todo?) {
+          fun bind(item: TodoApi?) {
       // assign it to `data` so it can be used with `setOnClickListener`
       data = item
-      wordItemView.text = item?.name
+      wordItemView.text = item?.title
 
     }
 
@@ -71,13 +72,13 @@ class TodoListAdapter(private val todoInterface: TodoInterface) : ListAdapter<To
     }
 
     companion object {
-        private val TODOS_COMPARATOR = object : DiffUtil.ItemCallback<Todo>() {
-            override fun areItemsTheSame(oldItem: Todo, newItem: Todo): Boolean {
+        private val TODOS_COMPARATOR = object : DiffUtil.ItemCallback<TodoApi>() {
+            override fun areItemsTheSame(oldItem: TodoApi, newItem: TodoApi): Boolean {
                 return oldItem === newItem
             }
 
-            override fun areContentsTheSame(oldItem: Todo, newItem: Todo): Boolean {
-                return oldItem.name == newItem.name
+            override fun areContentsTheSame(oldItem: TodoApi, newItem: TodoApi): Boolean {
+                return oldItem.title == newItem.title
             }
         }
     }

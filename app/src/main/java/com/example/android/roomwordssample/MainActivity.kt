@@ -25,10 +25,10 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.android.roomwordssample.database.Todo
+import com.example.android.roomwordssample.database.TodoRoom
+import com.example.android.roomwordssample.mocki.TodoApi
 import com.example.android.roomwordssample.todo.TodoInterface
 import com.example.android.roomwordssample.todo.TodoListAdapter
 import com.example.android.roomwordssample.todo.TodosApplication
@@ -50,7 +50,8 @@ class MainActivity : AppCompatActivity(), TodoInterface {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        todoViewModel.allTodos.observe(owner = this) { todos ->
+
+        todoViewModel.allTodosApi.observe( this) { todos ->
             // Update the cached copy of the words in the adapter.
             todos.let { adapter.submitList(it) }
         }
@@ -69,7 +70,7 @@ class MainActivity : AppCompatActivity(), TodoInterface {
                 showToast(applicationContext.getResources().getString(R.string.empty_not_saved))
             } else {
                 val todoName = editTextTodo.text.toString()
-                todoViewModel.insert(Todo(todoName))
+                //todoViewModel.insert(TodoRoom(todoName))
             }
         }
     }
@@ -79,8 +80,8 @@ class MainActivity : AppCompatActivity(), TodoInterface {
 
         if (requestCode == createTodoActivityRequestCode && resultCode == Activity.RESULT_OK) {
             intentData?.getStringExtra(EXTRA_REPLY)?.let { reply ->
-                val todo = Todo(reply)
-                todoViewModel.insert(todo)
+                val todo = TodoRoom(reply)
+                //todoViewModel.insert(todo)
             }
         } else {
             showToast(applicationContext.getResources().getString(R.string.empty_not_saved))
@@ -99,7 +100,8 @@ class MainActivity : AppCompatActivity(), TodoInterface {
         const val EXTRA_REPLY = "com.example.android.wordlistsql.REPLY"
     }
 
-    override fun onItemClick(todo: Todo) {
-        todoViewModel.delete(todo)
+    override fun onItemClick(todoApi: TodoApi) {
+        println("Hello")
+        //todoViewModel.delete(todoRoom)
     }
 }
