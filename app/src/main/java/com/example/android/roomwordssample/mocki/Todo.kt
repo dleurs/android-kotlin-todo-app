@@ -10,7 +10,7 @@ import kotlinx.android.parcel.Parcelize
  * The property names of this data class are used by Moshi to match the names of values in JSON.
  */
 @Parcelize
-data class TodoProperty (
+data class Todo (
     val userId: String,
     val id: String,
     val title: String,

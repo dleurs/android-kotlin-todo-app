@@ -5,7 +5,6 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Query
 
 private const val BASE_URL = "https://jsonplaceholder.typicode.com/"
 
@@ -28,7 +27,7 @@ private val retrofit = Retrofit.Builder()
 
 interface TodoApiService {
     @GET("todo")
-    suspend fun getTodos(): List<TodoProperty>
+    suspend fun getTodos(): List<Todo>
 }
 
 object TodoApi {
